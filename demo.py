@@ -1,10 +1,10 @@
 __author__ = 'David C. Dean'
 
-
 import salesforce_streaming as sf
 import time
 
 
+from demo_config import user, passwd, clid, clscrt
 auth = sf.OAuth(username=user, password=passwd, client_id=clid, client_secret=clscrt)
 
 print('\nAuthenticating...')
