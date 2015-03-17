@@ -1,2 +1,1 @@
-
-See the Project Wiki for notes on development.
+See the Project Wiki for development notes.
