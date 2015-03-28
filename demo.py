@@ -5,21 +5,21 @@ import time
 
 
 from demo_config import user, passwd, clid, clscrt
-auth = sf.OAuth(username=user, password=passwd, client_id=clid, client_secret=clscrt)
+auth_util = sf.OAuth2(username=user, password=passwd, client_id=clid, client_secret=clscrt)
 
 print('\nAuthenticating...')
-if auth.request_token():
+if auth_util.request_token():
     print('\nHandshaking...')
-    stream_api = sf.StreamingAPI(instance=auth.get_instance(), token=auth.get_token())
+    stream_api = sf.StreamingAPI(instance=auth_util.get_instance(), token=auth_util.get_token())
     if stream_api.handshake():
         print('\nSubscribing...')
         stream_api.subscribe('/topic/AllTestObjs')
-        print('\nConnecting...')
+        print('\nWaiting...')
 
         while True:
             time.sleep(2)
             stream_api.connect()
-            print('\nReconnect...')
+            print('\nWaiting...')
 
 else:
     print('Token Request Failed.')

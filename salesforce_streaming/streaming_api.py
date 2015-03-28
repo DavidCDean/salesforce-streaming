@@ -1,12 +1,13 @@
-__author__ = 'David C. Dean'
-
+import threading
 import requests
 import json
 
 
-class StreamingAPI:
+class StreamingClient(threading.Thread):
 
     def __init__(self, instance=None, token=None):
+        threading.Thread.__init__(self)  # super init
+
         self.__endpoint = instance + '/cometd/28.0'
         self.__token = token
         self.__hs_data = None
@@ -44,7 +45,7 @@ class StreamingAPI:
         return self.__hs_data['clientId']
 
     def _subscribe_payload(self, topic=None):
-        return json.dumps([{'channel': '/meta/subscribe', 'clientId': self.get_client_id(), 'subscription': topic }])
+        return json.dumps([{'channel': '/meta/subscribe', 'clientId': self.get_client_id(), 'subscription': topic}])
 
     def _handshake_payload(self):
         return json.dumps({'supportedConnectionTypes': ['long-polling'], 'version': '1.0', 'channel': '/meta/handshake', 'minimumVersion': '1.0'})

@@ -4,7 +4,7 @@ import requests
 import json
 
 
-class OAuth:
+class OAuth2:
 
     def __init__(self, endpoint='https://login.salesforce.com', username='', password='', client_id='', client_secret=''):
         self.__endpoint = endpoint
